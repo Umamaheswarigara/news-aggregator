@@ -50,13 +50,11 @@ services:
         value: https://node-backend.onrender.com
 
   # 4. React Frontend (Static Site)
-  - type: web
+  - type: static
     name: react-frontend
-    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     publishDir: dist
-    plan: free
 
 databases:
   - name: news-postgres-db
