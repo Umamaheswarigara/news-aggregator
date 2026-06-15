@@ -11,9 +11,13 @@ services:
           name: news-postgres-db
           property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        value: postgres
+        fromDatabase:
+          name: news-postgres-db
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        value: Srilekha@321
+        fromDatabase:
+          name: news-postgres-db
+          property: password
       - key: JWT_SECRET
         value: 9a4f2c5e8b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c
       - key: JWT_EXPIRATION
@@ -65,4 +69,3 @@ databases:
   - name: news-postgres-db
     plan: free
     databaseName: news_db
-    user: postgres
