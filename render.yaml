@@ -1,0 +1,65 @@
+services:
+  # 1. Spring Boot Backend (PostgreSQL connection)
+  - type: web
+    name: spring-boot-backend
+    env: docker
+    rootDir: backend-spring
+    plan: free
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: news-postgres-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        value: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: Srilekha@321
+      - key: JWT_SECRET
+        value: 9a4f2c5e8b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c
+      - key: JWT_EXPIRATION
+        value: 86400000
+
+  # 2. Node.js Backend (MongoDB NoSQL)
+  - type: web
+    name: node-backend
+    env: node
+    rootDir: backend-node
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://admin:Srilekha321@cluster0.mongodb.net/news_db?retryWrites=true&w=majority # Swap with your MongoDB Atlas connection string
+      - key: JWT_SECRET
+        value: 9a4f2c5e8b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c
+      - key: PORT
+        value: 5000
+
+  # 3. FastAPI Gateway (Routing)
+  - type: web
+    name: fastapi-gateway
+    env: python
+    rootDir: gateway
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: SPRING_BOOT_URL
+        value: https://spring-boot-backend.onrender.com
+      - key: NODE_JS_URL
+        value: https://node-backend.onrender.com
+
+  # 4. React Frontend (Static Site)
+  - type: web
+    name: react-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    plan: free
+
+databases:
+  - name: news-postgres-db
+    plan: free
+    databaseName: news_db
+    user: postgres
