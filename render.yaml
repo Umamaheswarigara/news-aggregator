@@ -41,7 +41,7 @@ services:
     plan: free
     envVars:
       - key: MONGO_URI
-        value: mongodb+srv://admin:Srilekha321@cluster0.mongodb.net/news_db?retryWrites=true&w=majority # Swap with your MongoDB Atlas connection string
+        value: mongodb+srv://2500031819_newsadmin:Srilekha%40321@cluster01.8honqd5.mongodb.net/news_db?appName=Cluster01
       - key: JWT_SECRET
         value: 9a4f2c5e8b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c8e5f2b1d4a7c
       - key: PORT
