@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -18,8 +19,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-SPRING_BOOT_URL = "http://localhost:8081"
-NODE_JS_URL = "http://localhost:5000"
+SPRING_BOOT_URL = os.environ.get("SPRING_BOOT_URL", "http://localhost:8081")
+NODE_JS_URL = os.environ.get("NODE_JS_URL", "http://localhost:5000")
 
 async def proxy_request(target_base_url: str, request: Request) -> Response:
     client = httpx.AsyncClient()

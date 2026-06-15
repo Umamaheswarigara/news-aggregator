@@ -17,13 +17,17 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB.");
-    // Warm up the embedding model on server startup
-    initEmbeddingModel();
-  })
-  .catch(err => console.error("MongoDB connection error:", err));
+if (!process.env.MONGO_URI) {
+  console.error("Error: MONGO_URI environment variable is not defined. Running without MongoDB connection.");
+} else {
+  mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log("Connected to MongoDB.");
+      // Warm up the embedding model on server startup
+      initEmbeddingModel().catch(err => console.error("Failed to initialize embedding model on startup:", err));
+    })
+    .catch(err => console.error("MongoDB connection error:", err));
+}
 
 // 1. GET detailed content of an article
 app.get('/api/v1/content/:articleId', async (req, res) => {

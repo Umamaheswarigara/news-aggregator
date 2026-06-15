@@ -6,10 +6,18 @@ services:
     rootDir: backend-spring
     plan: free
     envVars:
-      - key: SPRING_DATASOURCE_URL
+      - key: DB_HOST
         fromDatabase:
           name: news-postgres-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: news-postgres-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: news-postgres-db
+          property: database
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: news-postgres-db

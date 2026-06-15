@@ -6,8 +6,12 @@ let extractor = null;
 export async function initEmbeddingModel() {
   if (!extractor) {
     console.log("Initializing local embedding model (Xenova/all-MiniLM-L6-v2)...");
-    extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-    console.log("Embedding model loaded successfully.");
+    try {
+      extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+      console.log("Embedding model loaded successfully.");
+    } catch (error) {
+      console.error("Failed to load local embedding model:", error);
+    }
   }
 }
 
