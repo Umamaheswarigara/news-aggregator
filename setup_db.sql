@@ -52,7 +52,8 @@ INSERT INTO categories (category_name) VALUES
 ('Health'),
 ('Science'),
 ('Entertainment'),
-('Politics')
+('Politics'),
+('Environment')
 ON CONFLICT (category_name) DO NOTHING;
 
 -- Seed Sources
