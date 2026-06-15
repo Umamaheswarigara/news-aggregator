@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/api';
-import { Newspaper, Tag, Globe, Settings, ArrowRight, Shield, Database } from 'lucide-react';
+import { Newspaper, Tag, Globe, Settings, ArrowRight, Shield, Database, User } from 'lucide-react';
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ export default function Admin() {
   const [articleCount, setArticleCount] = useState(0);
   const [categoryCount, setCategoryCount] = useState(0);
   const [sourceCount, setSourceCount] = useState(0);
+  const [userCount, setUserCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,6 +40,9 @@ export default function Admin() {
 
         const sourcesRes = await api.getSources();
         setSourceCount(sourcesRes.length || 0);
+
+        const usersRes = await api.getUsers();
+        setUserCount(usersRes.length || 0);
       } catch (err) {
         console.error("Failed to load admin stats:", err);
       } finally {
@@ -70,7 +74,7 @@ export default function Admin() {
       {loading ? (
         <div className="text-center py-20 font-medium text-slate-500">Loading system metrics...</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Articles Stats Card */}
           <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 rounded-2xl shadow-sm flex flex-col justify-between space-y-4">
             <div className="flex justify-between items-center">
@@ -130,6 +134,27 @@ export default function Admin() {
               className="flex justify-between items-center text-xs font-bold text-indigo-600 dark:text-sky-400 hover:underline pt-2"
             >
               <span>Manage Sources</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          {/* Users Stats Card */}
+          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 rounded-2xl shadow-sm flex flex-col justify-between space-y-4">
+            <div className="flex justify-between items-center">
+              <div className="p-3 bg-sky-50 dark:bg-sky-950/20 text-sky-600 dark:text-sky-400 rounded-xl">
+                <User className="h-6 w-6" />
+              </div>
+              <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{userCount}</span>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 dark:text-slate-200">Users</h3>
+              <p className="text-xs text-slate-400 dark:text-slate-500">Registered readers and administrator roles.</p>
+            </div>
+            <Link
+              to="/admin/users"
+              className="flex justify-between items-center text-xs font-bold text-indigo-600 dark:text-sky-400 hover:underline pt-2"
+            >
+              <span>View User List</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

@@ -37,6 +37,10 @@ export const api = {
     const response = await apiClient.get('/auth/me');
     return response.data;
   },
+  getUsers: async () => {
+    const response = await apiClient.get('/users');
+    return response.data;
+  },
 
   // Articles CRUD (Spring Boot / PostgreSQL)
   getArticles: async (page = 0, size = 10, categoryId = null, sourceId = null, keyword = '') => {

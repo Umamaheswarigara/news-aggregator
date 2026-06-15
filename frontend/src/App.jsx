@@ -15,6 +15,7 @@ import Admin from './pages/Admin';
 import ManageArticles from './pages/ManageArticles';
 import ManageCategories from './pages/ManageCategories';
 import ManageSources from './pages/ManageSources';
+import ManageUsers from './pages/ManageUsers';
 
 import './App.css';
 
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="/admin/articles" element={<ManageArticles />} />
             <Route path="/admin/categories" element={<ManageCategories />} />
             <Route path="/admin/sources" element={<ManageSources />} />
+            <Route path="/admin/users" element={<ManageUsers />} />
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
