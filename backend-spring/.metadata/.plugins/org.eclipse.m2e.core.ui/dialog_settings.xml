@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\Dell\Desktop\New folder (3)\backend-spring"/>
 			<item value="C:\Users\Dell\Desktop\DBMS\backend-spring"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -36,5 +37,9 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>

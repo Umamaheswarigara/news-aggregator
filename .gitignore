@@ -1,0 +1,54 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.env
+
+# Build outputs
+dist/
+build/
+target/
+out/
+bin/
+
+# IDE and Editor files
+.metadata/
+.settings/
+.project
+.classpath
+.factorypath
+.springBeans
+.recommenders/
+.idea/
+*.iml
+*.iws
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# OS metadata
+Thumbs.db
+ehthumbs.db
+Desktop.ini
