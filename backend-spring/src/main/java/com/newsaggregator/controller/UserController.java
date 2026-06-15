@@ -29,6 +29,16 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("=== USER CONTROL DEBUG ===");
+        System.out.println("Authentication: " + auth);
+        if (auth != null) {
+            System.out.println("Principal: " + auth.getPrincipal());
+            System.out.println("Authorities: " + auth.getAuthorities());
+            System.out.println("Is Authenticated: " + auth.isAuthenticated());
+        }
+        System.out.println("==========================");
+
         if (!isAdmin()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access Denied: Admin role required");
         }
